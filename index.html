@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JAD Connect - Audit Patrimonial</title>
 
-    <!-- Google Fonts: Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -357,7 +356,6 @@
 
 <div id="app-wrapper">
 
-    <!-- PAGE 1: CONNEXION -->
     <div id="page1" class="page active">
         <h1>Bienvenue sur <span style="color:var(--accent-gold)">JAD Connect</span></h1>
         <p class="subtitle">Un outil d'audit exclusif conçu pour vous et vos clients.</p>
@@ -371,7 +369,6 @@
         </div>
     </div>
 
-    <!-- PAGE 2: ACCUEIL PERSONNALISÉ -->
     <div id="page2" class="page">
         <div class="logos-center">
             <img src="" id="center-logo-partner" class="logo-center-img" style="display:none;">
@@ -385,7 +382,6 @@
         </div>
     </div>
 
-    <!-- PAGE 3: FORME JURIDIQUE -->
     <div id="page3" class="page">
         <h1 class="page-title">Quelle est la forme juridique de la société ?</h1>
         <div class="form-container">
@@ -411,7 +407,6 @@
         </div>
     </div>
 
-    <!-- PAGE 4: EFFECTIF -->
     <div id="page4" class="page">
         <h1 class="page-title">Quel est l'effectif actuel de l'entreprise ?</h1>
         <div class="option-grid">
@@ -426,7 +421,6 @@
         </div>
     </div>
 
-    <!-- PAGE 5: STATUT SOCIAL -->
     <div id="page5" class="page">
         <h1 class="page-title">Quel est le statut social du dirigeant ?</h1>
         <div class="option-grid">
@@ -445,7 +439,6 @@
         </div>
     </div>
 
-    <!-- PAGE 6: TRESORERIE -->
     <div id="page6" class="page">
         <h1 class="page-title">Diagnostic Trésorerie</h1>
         <p class="subtitle">La société dispose-t-elle d'un excédent stable (&gt; 30k€) ?</p>
@@ -459,7 +452,6 @@
         </div>
     </div>
 
-    <!-- PAGE 6b: PRÉCISIONS TRESORERIE -->
     <div id="page6b" class="page">
         <h1 class="page-title">Précisions Financières</h1>
         <div class="form-container">
@@ -481,7 +473,6 @@
         </div>
     </div>
 
-    <!-- PAGE 7: PERIMETRE -->
     <div id="page7" class="page">
         <h1 class="page-title">Identifions le périmètre de l'audit</h1>
         <div class="option-grid">
@@ -494,7 +485,6 @@
         </div>
     </div>
 
-    <!-- PAGE 8: BESOINS DIRIGEANT -->
     <div id="page8" class="page">
         <h1 class="big-title">Besoins personnels du <span style="color: var(--accent-gold);">dirigeant</span></h1>
         <div class="option-grid grid-needs">
@@ -511,7 +501,6 @@
         </div>
     </div>
 
-    <!-- PAGE 10: LOOP PRÉCISIONS PAR OBJECTIF -->
     <div id="page10" class="page compact-diag">
         <div id="step-indicator" class="progress-step">Étape 1 sur X</div>
         <h1 class="big-title" id="precision-title">Existence de solutions</h1>
@@ -539,7 +528,6 @@
         </div>
     </div>
 
-    <!-- PAGE 11: BESOINS SOCIÉTÉ -->
     <div id="page11" class="page">
         <h1 class="big-title">Besoins pour <span style="color: var(--accent-gold);">sa société / ses salariés</span></h1>
         <div class="option-grid grid-needs">
@@ -557,7 +545,6 @@
         </div>
     </div>
 
-    <!-- PAGE 14: FISCALITÉ -->
     <div id="page14" class="page">
         <h1 class="page-title">Analyse Fiscale</h1>
         <div class="form-container">
@@ -596,7 +583,6 @@
         </div>
     </div>
 
-    <!-- PAGE CONTACT -->
     <div id="page-contact" class="page">
         <h1 class="page-title">Coordonnées du client</h1>
         <p class="subtitle">Ces informations permettront à JAD Conseil de reprendre contact avec le prospect.</p>
@@ -610,7 +596,6 @@
         </div>
     </div>
 
-    <!-- PAGE 15: COMMENTAIRE LIBRE -->
     <div id="page15" class="page">
         <h1 class="big-title">Observations <span style="color: var(--accent-gold);">complémentaires</span></h1>
         <div class="form-container" style="max-width: 650px;">
@@ -622,7 +607,6 @@
         </div>
     </div>
 
-    <!-- PAGE 16: FINALISATION + SYNTHÈSE + EMAIL COLLAB -->
     <div id="page16" class="page">
         <h1 class="page-title final-title">
             Finalisation &amp; Envoi de <span class="audit-accent-50">mon Audit</span>
@@ -648,7 +632,6 @@
         </div>
     </div>
 
-    <!-- PAGE 17: REMERCIEMENTS -->
     <div id="page17" class="page">
         <h1 class="page-title">
             Audit transmis avec <span class="audit-accent-50">succès</span>
@@ -680,8 +663,8 @@
 </div>
 
 <script>
-    // ✅ Webhook Make (ton URL)
-    const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/yifw3ygymu1ouffubwhphtvfo1o4grpq";
+    // ✅ URL mise à jour pour n8n (Ligne 358)
+    const MAKE_WEBHOOK_URL = "https://davsouf.app.n8n.cloud/webhook-test/audit-gestil";
 
     let auditData = {
         cabinet: "", collab: "", collabMail: "", client: "", forme: "", effectif: "", statut: "", treso: "",
