@@ -13,7 +13,7 @@
             --bg-color: #F8EFEA;
             --primary-vin: #591B2A;
             --accent-gold: #FFBD59;
-            --accent-gold-50: #FFBD50;
+            --accent-gold-50: #FFBD50; /* demandé */
             --accent-pink: #EDB3CB;
             --white: #FFFFFF;
             --shadow-soft: 0 5px 20px rgba(89, 27, 42, 0.05);
@@ -24,24 +24,17 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html, body {
-            height: 100%;
-            background-color: var(--bg-color);
-            color: var(--primary-vin);
-            font-family: 'Montserrat', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            /* ✅ AJOUT : Autorise le scroll si le contenu dépasse */
-            overflow-y: auto; 
-            overflow-x: hidden;
+           min-height: 100%; /* Permet à la page de grandir si besoin */
+    overflow-y: auto; /* Active le scroll vertical si le contenu dépasse */
+    background-color: var(--bg-color);
+    color: var(--primary-vin);
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
         }
-
-        /* ✅ AJOUT : BARRE DE DÉFILEMENT PERSONNALISÉE (Lie de Vin) */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: var(--primary-vin); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-gold); }
 
         body { display: flex; flex-direction: column; }
 
+        /* HEADER FIXE AVEC LOGOS */
         .top-header {
             width: 100%;
             padding: 15px 40px;
@@ -64,25 +57,28 @@
             display: none;
         }
 
+        /* CONTENEUR PRINCIPAL */
         #app-wrapper {
             flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
         }
 
         .page {
-            width: 100%;
-            max-width: 900px;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.4s ease-out;
-            text-align: center;
-            margin: auto;
-            min-height: 100%;
+           .page {
+    width: 100%;
+    max-width: 900px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligne vers le haut pour laisser de la place */
+    padding: 20px 15px; /* Espace sur les côtés sur mobile */
+    margin: 0 auto;
+    min-height: 80vh; /* Hauteur minimale souple */
+}
         }
 
         .page.active { display: flex; }
@@ -92,6 +88,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* TYPOGRAPHIE */
         h1, .big-title, .page-title {
             font-family: 'Montserrat', sans-serif;
             font-size: var(--title-size);
@@ -102,12 +99,14 @@
         }
 
         .subtitle {
+            font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
             font-size: 1.1rem;
             color: var(--primary-vin);
             margin-bottom: 3vh;
             font-weight: 400;
         }
 
+        /* FORMULAIRES */
         .form-container {
             text-align: left;
             margin: 0 auto;
@@ -119,6 +118,7 @@
 
         label {
             display: block;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 0.8rem;
             margin-bottom: 8px;
@@ -134,6 +134,7 @@
             color: var(--primary-vin);
             border-radius: var(--radius);
             font-size: 1rem;
+            font-family: 'Futura', sans-serif;
             outline: none;
             transition: all 0.3s ease;
         }
@@ -141,6 +142,7 @@
 
         input:hover, select:hover, textarea:hover, .option-card:hover { border-color: var(--accent-gold); }
 
+        /* NAVIGATION & BOUTONS */
         .nav-actions {
             display: flex;
             justify-content: center;
@@ -156,6 +158,7 @@
             color: var(--white);
             border: none;
             padding: 18px 50px;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 0.9rem;
             border-radius: 50px;
@@ -177,6 +180,7 @@
             color: var(--primary-vin);
             border: 1.5px solid var(--primary-vin);
             padding: 12px 30px;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 0.75rem;
             border-radius: 50px;
@@ -186,6 +190,7 @@
         }
         .btn-prev:hover { background-color: var(--accent-pink); border-color: var(--accent-pink); }
 
+        /* GRILLES D'OPTIONS */
         .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; }
         .grid-needs { grid-template-columns: repeat(3, 1fr); }
 
@@ -207,10 +212,12 @@
         }
         .option-card.selected { background-color: var(--primary-vin); color: var(--white); border-color: var(--primary-vin); }
 
+        /* LOGOS CENTRAUX */
         .logos-center { display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 5vh; }
         .logo-center-img { height: 75px; width: auto; object-fit: contain; }
         .center-sep { width: 1px; height: 50px; background-color: var(--primary-vin); display: none; }
 
+        /* SYNTHÈSE */
         .summary-box {
             text-align: left;
             background: var(--white);
@@ -228,26 +235,132 @@
 
         .summary-section { margin-bottom: 25px; border-bottom: 1px solid rgba(89, 27, 42, 0.05); padding-bottom: 15px; }
         .summary-section:last-child { border-bottom: none; }
-        .section-title { font-weight: 700; text-transform: uppercase; font-size: 0.7rem; color: var(--accent-gold); letter-spacing: 2px; margin-bottom: 10px; display: block; }
-        .summary-item { display: flex; justify-content: space-between; margin-bottom: 6px; color: var(--primary-vin); }
-        .summary-item b { font-weight: 700; }
 
-        /* ✅ AJOUT : CORRECTIFS RESPONSIVE POUR MOBILE */
-        @media (max-width: 650px) {
-            :root { --title-size: 1.4rem; }
-            .top-header { padding: 15px; }
-            .option-grid, .grid-needs { grid-template-columns: 1fr; }
-            .nav-actions { flex-direction: column; width: 100%; }
-            .btn-jad, .btn-prev { width: 100%; text-align: center; }
-            .logos-center { gap: 15px; }
-            .logo-center-img { height: 50px; }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
         }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-family: 'Futura', sans-serif;
+            color: var(--primary-vin);
+        }
+        .summary-item b { font-weight: 700; font-family: 'Montserrat', sans-serif; }
+
+        /* COMPACTAGE POUR DIAGNOSTIC */
+        #page10.compact-diag .big-title { font-size: 1.3rem; margin-bottom: 1.5vh; }
+        #page10.compact-diag .subtitle { font-size: 0.95rem; margin-bottom: 2vh; }
+        #page10.compact-diag .option-card { min-height: 50px; padding: 10px; }
+        #page10.compact-diag .field { margin-bottom: 1vh; }
+        #page10.compact-diag label { font-size: 0.75rem; margin-bottom: 4px; }
+        #page10.compact-diag input { padding: 10px 14px; font-size: 0.85rem; }
+        #page10.compact-diag textarea { height: 60px; padding: 10px; font-size: 0.85rem; }
+        #page10.compact-diag .nav-actions { margin-top: 1.5vh; }
+
+        /* MESSAGE ERREUR */
+        #error-msg{
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-vin);
+            color: white;
+            padding: 12px 35px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+            z-index: 1000;
+            font-size: 0.8rem;
+        }
+
+        /* PAGE 16 : PLEINE PAGE + SCROLL UNIQUEMENT DANS LA SYNTHESE */
+        .final-title { margin-bottom: 12px; }
+        .audit-accent-50 { color: var(--accent-gold-50); }
+
+        .final-paragraph{
+            text-align: center;
+            font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+            color: var(--primary-vin);
+            font-size: 1rem;
+            line-height: 1.55;
+            max-width: 780px;
+            margin: 0 auto 12px auto;
+        }
+        .final-secondary{ font-size: 0.9rem; opacity: 0.9; }
+
+        #page16{
+            height: 100%;
+            justify-content: flex-start;
+            overflow: hidden;
+            padding-top: 10px;
+        }
+
+        /* Zone scrollable unique sur page 16 */
+        #page16 #final-summary-full.summary-box{
+            flex: 1 1 auto;
+            width: 100%;
+            max-width: 850px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            max-height: none;
+            margin-bottom: 12px;
+        }
+
+        #page16 #final-actions{
+            margin-top: 0;
+            padding-bottom: 0;
+            flex-shrink: 0;
+        }
+
+        /* Champ email collab sur page 16 */
+        .collab-mail-wrap{
+            width: 100%;
+            max-width: 650px;
+            margin-bottom: 10px;
+        }
+        .collab-mail-wrap label{
+            text-transform: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.2px;
+        }
+
+        /* PAGE 17 : LOGO + TEXTE SECONDaire */
+        .thanks-logo{
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            margin: 8px 0 18px 0;
+        }
+        .thanks-secondary{ font-size: 0.85rem; opacity: 0.85; }
+/* --- ADAPTATION MOBILE (MEDIA QUERY) --- */
+@media (max-width: 600px) {
+    :root { --title-size: 1.4rem; } /* Titres plus petits */
+    
+    .top-header { padding: 10px; height: 60px; }
+    .header-logo { height: 30px; }
+    
+    .option-grid { grid-template-columns: 1fr; } /* Une seule colonne sur mobile */
+    .grid-needs { grid-template-columns: 1fr; }
+    
+    .btn-jad { width: 100%; padding: 15px 20px; font-size: 0.8rem; }
+    .nav-actions { flex-direction: column; gap: 10px; }
+    .btn-prev { order: 2; width: 100%; } /* Bouton précédent en dessous */
+}
     </style>
 </head>
 
 <body>
 
-<div id="error-msg" style="position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--primary-vin); color:white; padding:12px 35px; border-radius:8px; display:none; z-index:1000; font-size:0.8rem;">Veuillez renseigner tous les champs.</div>
+<div id="error-msg">Veuillez renseigner tous les champs obligatoires.</div>
 
 <div class="top-header" id="main-header">
     <img src="" id="header-logo-partner" class="header-logo" style="display:none;">
@@ -256,6 +369,7 @@
 </div>
 
 <div id="app-wrapper">
+
     <div id="page1" class="page active">
         <h1>Bienvenue sur <span style="color:var(--accent-gold)">JAD Connect</span></h1>
         <p class="subtitle">Un outil d'audit exclusif conçu pour vous et vos clients.</p>
@@ -291,7 +405,7 @@
                     <option value="EI">EI (Entreprise Individuelle)</option>
                     <option value="EURL">EURL</option>
                     <option value="Holding">Holding</option>
-                    <option value="Micro Entreprise">Micro Entreprise</option>
+                    <option value="Micro Entreprise">Micro Entreprise / Auto-Entrepreneur</option>
                     <option value="SA">SA (Société Anonyme)</option>
                     <option value="SARL">SARL (Société à Responsabilité Limitée)</option>
                     <option value="SAS">SAS / SASU</option>
@@ -324,8 +438,14 @@
     <div id="page5" class="page">
         <h1 class="page-title">Quel est le statut social du dirigeant ?</h1>
         <div class="option-grid">
-            <div class="option-card" onclick="setOption('statut', 'TNS', this)">TNS</div>
-            <div class="option-card" onclick="setOption('statut', 'Assimilé Salarié', this)">Assimilé Salarié</div>
+            <div class="option-card" onclick="setOption('statut', 'TNS', this)">
+                <span>TNS</span>
+                <small style="font-weight:400; font-size:0.65rem; margin-top:5px; opacity:0.7;">Gérant majoritaire / Indépendant</small>
+            </div>
+            <div class="option-card" onclick="setOption('statut', 'Assimilé Salarié', this)">
+                <span>Assimilé Salarié</span>
+                <small style="font-weight:400; font-size:0.65rem; margin-top:5px; opacity:0.7;">Président SAS / SASU</small>
+            </div>
         </div>
         <div class="nav-actions">
             <button class="btn-prev" onclick="showPage(4)">Précédent</button>
@@ -335,7 +455,7 @@
 
     <div id="page6" class="page">
         <h1 class="page-title">Diagnostic Trésorerie</h1>
-        <p class="subtitle">La société dispose-t-elle d'un excédent stable (> 30k€) ?</p>
+        <p class="subtitle">La société dispose-t-elle d'un excédent stable (&gt; 30k€) ?</p>
         <div class="option-grid">
             <div class="option-card" onclick="setOption('treso', 'Oui', this)">Oui</div>
             <div class="option-card" onclick="setOption('treso', 'Non', this)">Non</div>
@@ -349,13 +469,16 @@
     <div id="page6b" class="page">
         <h1 class="page-title">Précisions Financières</h1>
         <div class="form-container">
-            <div class="field"><label>Montant trésorerie</label><input type="text" id="in_treso_montant" onblur="handleCurrencyFormat(this)"></div>
-            <div class="field"><label>BFR</label><input type="text" id="in_treso_bfr" onblur="handleCurrencyFormat(this)"></div>
-            <div class="field"><label>Excédent optimisable</label><input type="text" id="in_treso_excedent" onblur="handleCurrencyFormat(this)"></div>
-            <label style="text-align:center; margin-bottom:10px;">Le client a-t-il déjà eu recours à des placements ?</label>
-            <div class="option-grid">
-                <div class="option-card" onclick="setOption('dejaPlacementTreso', 'Oui', this)">Oui</div>
-                <div class="option-card" onclick="setOption('dejaPlacementTreso', 'Non', this)">Non</div>
+            <div class="field"><label>Montant actuel de la trésorerie</label><input type="text" id="in_treso_montant" onblur="handleCurrencyFormat(this)" oninput="cleanNonNumeric(this)"></div>
+            <div class="field"><label>BFR (Besoin en Fonds de Roulement)</label><input type="text" id="in_treso_bfr" onblur="handleCurrencyFormat(this)" oninput="cleanNonNumeric(this)"></div>
+            <div class="field"><label>Votre estimation de l'excédent optimisable</label><input type="text" id="in_treso_excedent" onblur="handleCurrencyFormat(this)" oninput="cleanNonNumeric(this)"></div>
+
+            <div style="margin-top: 15px;">
+                <label style="text-align: center; margin-bottom: 10px;">Le client a-t-il déjà eu recours à des placements ?</label>
+                <div class="option-grid">
+                    <div class="option-card" id="btn-placed-oui" onclick="setOption('dejaPlacementTreso', 'Oui', this)" style="min-height:50px;">Oui</div>
+                    <div class="option-card" id="btn-placed-non" onclick="setOption('dejaPlacementTreso', 'Non', this)" style="min-height:50px;">Non</div>
+                </div>
             </div>
         </div>
         <div class="nav-actions">
@@ -379,11 +502,12 @@
     <div id="page8" class="page">
         <h1 class="big-title">Besoins personnels du <span style="color: var(--accent-gold);">dirigeant</span></h1>
         <div class="option-grid grid-needs">
-            <div class="option-card" onclick="toggleOption('besoinsDir', 'Se protéger en cas d’arrêt de travail', this)">Arrêt de travail</div>
+            <div class="option-card" onclick="toggleOption('besoinsDir', 'Se protéger en cas d’arrêt de travail', this)">Se protéger en cas d’arrêt de travail</div>
             <div class="option-card" onclick="toggleOption('besoinsDir', 'Anticiper sa retraite', this)">Anticiper sa retraite</div>
             <div class="option-card" onclick="toggleOption('besoinsDir', 'Réduire son imposition', this)">Réduire son imposition</div>
-            <div class="option-card" onclick="toggleOption('besoinsDir', 'Optimiser son épargne personnelle', this)">Épargne personnelle</div>
-            <div class="option-card" onclick="toggleOption('besoinsDir', 'Couvrir ses frais de santé', this)">Frais de santé</div>
+            <div class="option-card" onclick="toggleOption('besoinsDir', 'Optimiser son épargne personnelle', this)">Optimiser son épargne personnelle</div>
+            <div class="option-card" onclick="toggleOption('besoinsDir', 'Transformer ses revenus actuels en patrimoine durable', this)">Transformer ses revenus actuels en patrimoine durable</div>
+            <div class="option-card" onclick="toggleOption('besoinsDir', 'Couvrir ses frais de santé', this)">Couvrir ses frais de santé</div>
         </div>
         <div class="nav-actions">
             <button class="btn-prev" onclick="showPage(7)">Précédent</button>
@@ -391,18 +515,27 @@
         </div>
     </div>
 
-    <div id="page10" class="page">
-        <div id="step-indicator" style="font-size:0.75rem; opacity:0.7; margin-bottom:10px;"></div>
+    <div id="page10" class="page compact-diag">
+        <div id="step-indicator" class="progress-step">Étape 1 sur X</div>
         <h1 class="big-title" id="precision-title">Existence de solutions</h1>
         <p class="subtitle" id="precision-subtitle"></p>
-        <div class="option-grid" style="max-width: 450px; margin: 0 auto 20px;">
+
+        <div class="option-grid" style="max-width: 450px; margin-bottom: 2vh; margin-left: auto; margin-right: auto;">
             <div class="option-card" id="btn-has-sol-oui" onclick="setNeedSolution('Oui', this)">Oui</div>
             <div class="option-card" id="btn-has-sol-non" onclick="setNeedSolution('Non', this)">Non</div>
         </div>
+
         <div id="need-details-area" class="form-container" style="display: none;">
-            <div class="field"><label>Produit / Établissement</label><input type="text" id="current-prod"></div>
-            <div class="field"><label>Détails pertinents</label><textarea id="current-note"></textarea></div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+                <div class="field"><label>Produit</label><input type="text" id="current-prod" style="padding: 10px;"></div>
+                <div class="field"><label>Établissement</label><input type="text" id="current-etab" style="padding: 10px;"></div>
+            </div>
+            <div class="field">
+                <label>Détails pertinents</label>
+                <textarea id="current-note" style="height: 65px;"></textarea>
+            </div>
         </div>
+
         <div class="nav-actions">
             <button class="btn-prev" onclick="navPrecisionBack()">Précédent</button>
             <button class="btn-jad" onclick="navPrecisionNext()">Suivant</button>
@@ -410,12 +543,15 @@
     </div>
 
     <div id="page11" class="page">
-        <h1 class="big-title">Besoins pour <span style="color: var(--accent-gold);">sa société</span></h1>
+        <h1 class="big-title">Besoins pour <span style="color: var(--accent-gold);">sa société / ses salariés</span></h1>
         <div class="option-grid grid-needs">
-            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Frais de santé des salariés', this)">Santé salariés</div>
-            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Prévoyance des salariés', this)">Prévoyance salariés</div>
+            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Protéger l’entreprise en cas de problème touchant le dirigeant', this)">Protéger l’entreprise en cas de problème touchant le dirigeant</div>
+            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Sécuriser l’entreprise face aux imprévus humains ou financiers', this)">Sécuriser l’entreprise face aux imprévus humains ou financiers</div>
+            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Préparer la transmission / cession', this)">Préparer la transmission / cession</div>
+            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Frais de santé des salariés', this)">Frais de santé des salariés</div>
+            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Prévoyance des salariés', this)">Prévoyance des salariés</div>
             <div class="option-card" onclick="toggleOption('besoinsSoc', 'Epargne salariale', this)">Epargne salariale</div>
-            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Préparer la transmission / cession', this)">Transmission</div>
+            <div class="option-card" onclick="toggleOption('besoinsSoc', 'Prime partage valeur (PPV)', this)">Prime partage valeur (PPV)</div>
         </div>
         <div class="nav-actions">
             <button class="btn-prev" onclick="prevFromPage11()">Précédent</button>
@@ -428,11 +564,31 @@
         <div class="form-container">
             <div class="field">
                 <label>Nature de l'impôt</label>
-                <select id="select-impot-nature"><option value="IR">IR</option><option value="IS">IS</option><option value="IFI">IFI</option></select>
+                <select id="select-impot-nature">
+                    <option value="" disabled selected>Choisir...</option>
+                    <option value="IR">IR</option>
+                    <option value="IS">IS</option>
+                    <option value="IFI">IFI</option>
+                </select>
             </div>
             <div class="field">
-                <label>Montant cible</label>
-                <select id="select-impot-montant"><option value="< 5k€">< 5 000€</option><option value="5-15k€">5 000 - 15 000€</option><option value="> 15k€">> 15 000€</option></select>
+                <label>Montant à gommer cible</label>
+                <select id="select-impot-montant">
+                    <option value="" disabled selected>Choisir...</option>
+                    <option value="< 5k€">&lt; 5 000 €</option>
+                    <option value="5-15k€">5 000 - 15 000 €</option>
+                    <option value="> 15k€">&gt; 15 000 €</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Levier préféré</label>
+                <select id="select-impot-levier">
+                    <option value="" disabled selected>Choisir...</option>
+                    <option value="Immobilier">Immobilier</option>
+                    <option value="Financier">Financier</option>
+                    <option value="PER">PER</option>
+                    <option value="Indifférent">Indifférent</option>
+                </select>
             </div>
         </div>
         <div class="nav-actions">
@@ -443,9 +599,10 @@
 
     <div id="page-contact" class="page">
         <h1 class="page-title">Coordonnées du client</h1>
+        <p class="subtitle">Ces informations permettront à JAD Conseil de reprendre contact avec le prospect.</p>
         <div class="form-container">
-            <div class="field"><label>Adresse E-mail</label><input type="email" id="in_client_mail"></div>
-            <div class="field"><label>Numéro de téléphone</label><input type="tel" id="in_client_tel"></div>
+            <div class="field"><label>Adresse E-mail</label><input type="email" id="in_client_mail" placeholder="client@exemple.com"></div>
+            <div class="field"><label>Numéro de téléphone direct</label><input type="tel" id="in_client_tel" placeholder="06 00 00 00 00"></div>
         </div>
         <div class="nav-actions">
             <button class="btn-prev" onclick="prevFromContact()">Précédent</button>
@@ -454,9 +611,9 @@
     </div>
 
     <div id="page15" class="page">
-        <h1 class="big-title">Observations</h1>
-        <div class="form-container">
-            <textarea id="in_commentaire" style="height:150px;" placeholder="Notes du collaborateur..."></textarea>
+        <h1 class="big-title">Observations <span style="color: var(--accent-gold);">complémentaires</span></h1>
+        <div class="form-container" style="max-width: 650px;">
+            <div class="field"><label>Note du collaborateur</label><textarea id="in_commentaire" style="height:150px;"></textarea></div>
         </div>
         <div class="nav-actions">
             <button class="btn-prev" onclick="showPage('page-contact')">Précédent</button>
@@ -465,28 +622,62 @@
     </div>
 
     <div id="page16" class="page">
-        <h1 class="page-title">Finalisation</h1>
-        <div class="form-container" style="margin-bottom:10px;">
-            <label>Votre e-mail (pour accusé réception)</label>
-            <input type="email" id="in_collab_mail">
+        <h1 class="page-title final-title">
+            Finalisation &amp; Envoi de <span class="audit-accent-50">mon Audit</span>
+        </h1>
+
+        <p class="final-paragraph">
+            En cliquant sur le bouton « Envoyer », votre audit sera automatiquement transmis à JAD Conseil.<br>
+            Nos équipes se chargeront ensuite de prendre contact avec votre client dans les meilleurs délais.
+        </p>
+
+        <div class="form-container collab-mail-wrap">
+            <div class="field" style="margin-bottom: 10px;">
+                <label>Votre adresse e-mail (pour accusé de réception)</label>
+                <input type="email" id="in_collab_mail" placeholder="prenom.nom@cabinet.com">
+            </div>
         </div>
+
         <div id="final-summary-full" class="summary-box"></div>
-        <div class="nav-actions">
+
+        <div class="nav-actions" id="final-actions">
             <button class="btn-prev" onclick="showPage(15)">Précédent</button>
             <button class="btn-jad" onclick="sendAuditToMake()">Envoyer</button>
         </div>
     </div>
 
     <div id="page17" class="page">
-        <h1 class="page-title">Audit transmis avec <span style="color:var(--accent-gold-50)">succès</span></h1>
-        <img src="https://static.wixstatic.com/media/372258_429b8cad6bec47ecb20949a0b1fe0142~mv2.png" class="logo-center-img" style="margin:20px 0;">
-        <div class="nav-actions">
-            <button class="btn-jad" onclick="location.reload()">Fermer</button>
+        <h1 class="page-title">
+            Audit transmis avec <span class="audit-accent-50">succès</span>
+        </h1>
+
+        <img
+            src="https://static.wixstatic.com/media/372258_429b8cad6bec47ecb20949a0b1fe0142~mv2.png"
+            alt="Logo JAD Conseil"
+            class="thanks-logo"
+        >
+
+        <p class="final-paragraph">
+            Merci pour votre collaboration.<br><br>
+            L’audit a bien été transmis à JAD Conseil pour analyse.<br>
+            Nos équipes vont désormais prendre le relais et s’engagent à vous tenir informé de l’évolution de la situation.
+        </p>
+
+        <p class="final-paragraph final-secondary thanks-secondary">
+            Si vous souhaitez apporter un complément ou une précision,<br>
+            vous pouvez contacter directement JAD Conseil à l’adresse suivante :<br>
+            <b>contact@jadconseil.com</b>
+        </p>
+
+        <div class="nav-actions" style="margin-top: 0;">
+            <button class="btn-jad" onclick="resetApp()">Fermer</button>
         </div>
     </div>
+
 </div>
 
 <script>
+    // ✅ URL mise à jour pour n8n (Ligne 358)
     const MAKE_WEBHOOK_URL = "https://davsouf.app.n8n.cloud/webhook/audit-gestil";
 
     let auditData = {
@@ -495,130 +686,397 @@
         clientMail: "", clientTel: "",
         typesBesoins: [], besoinsDir: [], besoinsSoc: [],
         precisions: {},
-        impotNature: "", impotMontant: "",
+        impotNature: "", impotMontant: "", impotLevier: "",
         commentaire: ""
     };
 
     let currentType = "";
     let currentNeedIndex = 0;
 
+    function cleanNonNumeric(el) { el.value = el.value.replace(/[^\d]/g, ''); }
+
     function handleCurrencyFormat(el) {
-        let val = el.value.replace(/[^\d]/g, '');
-        if (val) el.value = parseInt(val).toLocaleString('fr-FR') + " €";
+        let value = el.value.trim();
+        let digits = value.replace(/[^\d]/g, '');
+        if (digits !== "") el.value = parseInt(digits, 10).toLocaleString('fr-FR') + " €";
+        else el.value = "";
+    }
+
+    function showMessage(txt) {
+        const msg = document.getElementById('error-msg');
+        msg.innerText = txt;
+        msg.style.display = "block";
+        setTimeout(() => { msg.style.display = "none"; }, 3500);
     }
 
     function showPage(num) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const target = typeof num === 'string' ? document.getElementById(num) : document.getElementById('page' + num);
         if (target) target.classList.add('active');
-        document.getElementById('main-header').style.visibility = (num === 1 || num === 17) ? "hidden" : "visible";
+
+        const header = document.getElementById('main-header');
+        header.style.visibility =
+            (num === 1 || num === 2 || num === 17 || num === 'page1' || num === 'page2' || num === 'page17')
+                ? "hidden" : "visible";
     }
 
     function toPage2() {
         const cab = document.getElementById('input-cabinet').value.trim();
         const col = document.getElementById('input-collab').value.trim();
         const cli = document.getElementById('input-client').value.trim();
-        if (!cab || !col || !cli) { alert("Champs obligatoires."); return; }
-        auditData.cabinet = cab; auditData.collab = col; auditData.client = cli;
 
-        // ✅ WORDING EXACT RESTAURÉ
+        if (!cab || !col || !cli) { showMessage("Veuillez remplir les 3 champs."); return; }
+
+        auditData.cabinet = cab;
+        auditData.collab = col;
+        auditData.client = cli;
+
+        // ✅ Page 2 : wording exact demandé (Collaborateur + Client en or)
         document.getElementById('welcome-text').innerHTML =
             `Bienvenue <span style="color:var(--accent-gold);">${col}</span><br>
              Commençons à présent l'audit de votre client <span style="color:var(--accent-gold);">${cli}</span>`;
 
-        // ✅ LOGIQUE LOGO PARTENAIRE RESTAURÉE
+        // Logos partenaire (ex: Gestil)
         const cLogoPartner = document.getElementById('center-logo-partner');
         const hLogoPartner = document.getElementById('header-logo-partner');
+        const cSep = document.getElementById('center-sep-main');
+        const hSep = document.getElementById('header-sep');
+
         if (cab.toLowerCase().includes("gestil")) {
-            const url = "https://static.wixstatic.com/media/372258_fce967cb206e4d08bd4956051bcf546a~mv2.png";
-            cLogoPartner.src = url; cLogoPartner.style.display = "block";
-            hLogoPartner.src = url; hLogoPartner.style.display = "block";
+            const partnerUrl = "https://static.wixstatic.com/media/372258_fce967cb206e4d08bd4956051bcf546a~mv2.png";
+            cLogoPartner.src = partnerUrl; cLogoPartner.style.display = "block"; cSep.style.display = "block";
+            hLogoPartner.src = partnerUrl; hLogoPartner.style.display = "block"; hSep.style.display = "block";
+            hSep.style.backgroundColor = "var(--primary-vin)";
+        } else {
+            cLogoPartner.style.display = "none"; cSep.style.display = "none";
+            hLogoPartner.style.display = "none"; hSep.style.display = "none";
         }
+
         showPage(2);
     }
 
-    function savePage3() { auditData.forme = document.getElementById('select-forme').value; showPage(4); }
-    function savePage4() { showPage(5); }
-    function setOption(key, val, el) {
-        auditData[key] = val;
-        el.parentElement.querySelectorAll('.option-card').forEach(s => s.classList.remove('selected'));
+    function savePage3() {
+        const val = document.getElementById('select-forme').value;
+        if (!val) { showMessage("Choisissez une forme juridique."); return; }
+        auditData.forme = val;
+        showPage(4);
+    }
+
+    function savePage4() {
+        if (!auditData.effectif) { showMessage("Sélectionnez l'effectif."); return; }
+        showPage(5);
+    }
+
+    function setOption(key, value, el) {
+        auditData[key] = value;
+        const siblings = el.parentElement.querySelectorAll('.option-card');
+        siblings.forEach(s => s.classList.remove('selected'));
         el.classList.add('selected');
     }
-    function toggleOption(key, val, el) {
-        const idx = auditData[key].indexOf(val);
-        if (idx > -1) { auditData[key].splice(idx, 1); el.classList.remove('selected'); }
-        else { auditData[key].push(val); el.classList.add('selected'); }
+
+    function toggleOption(key, value, el) {
+        const index = auditData[key].indexOf(value);
+        if (index > -1) { auditData[key].splice(index, 1); el.classList.remove('selected'); }
+        else { auditData[key].push(value); el.classList.add('selected'); }
     }
-    function nextFromPage6() { if (auditData.treso === 'Oui') showPage('page6b'); else showPage(7); }
+
+    function nextFromPage6() {
+        if (!auditData.treso) { showMessage("Répondez par Oui ou Non."); return; }
+        if (auditData.treso === 'Oui') showPage('page6b');
+        else showPage(7);
+    }
+
     function savePage6b() {
         auditData.treso_montant = document.getElementById('in_treso_montant').value;
+        auditData.treso_bfr = document.getElementById('in_treso_bfr').value;
         auditData.treso_excedent = document.getElementById('in_treso_excedent').value;
+        if (!auditData.dejaPlacementTreso) { showMessage("Précisez l'historique."); return; }
         showPage(7);
     }
+
+    function prevFromPage7() { if (auditData.treso === 'Oui') showPage('page6b'); else showPage(6); }
+
     function nextFromPage7() {
+        if (auditData.typesBesoins.length === 0) { showMessage("Choisissez au moins un périmètre."); return; }
         if (auditData.typesBesoins.includes('Dirigeant')) showPage(8);
         else showPage(11);
     }
-    function nextFromPage8() { currentType = "dir"; currentNeedIndex = 0; initPrecisionPage(); }
-    function nextFromPage11() { currentType = "soc"; currentNeedIndex = 0; initPrecisionPage(); }
+
+    function nextFromPage8() {
+        if (auditData.besoinsDir.length === 0) { showMessage("Sélectionnez au moins un besoin."); return; }
+        currentType = "dir"; currentNeedIndex = 0; initPrecisionPage();
+    }
+
+    function nextFromPage11() {
+        if (auditData.besoinsSoc.length === 0) { showMessage("Sélectionnez un besoin entreprise."); return; }
+        currentType = "soc"; currentNeedIndex = 0; initPrecisionPage();
+    }
 
     function initPrecisionPage() {
         const needs = currentType === "dir" ? auditData.besoinsDir : auditData.besoinsSoc;
         const need = needs[currentNeedIndex];
-        document.getElementById('precision-subtitle').innerHTML = `Pour l'objectif "<span style="color:var(--accent-gold);">${need}</span>", le client a-t-il déjà une solution?`;
-        document.getElementById('step-indicator').innerText = `Besoin ${currentNeedIndex+1} sur ${needs.length}`;
-        showPage(10);
+        const typeLabel = currentType === "dir" ? "Dirigeant" : "Entreprise";
+
+        document.getElementById('precision-title').innerText = `Existence de solutions (${typeLabel})`;
+        document.getElementById('precision-subtitle').innerHTML =
+            `Pour l'objectif "<span style="color:#FFBD59; font-weight:700;">${need}</span>", votre client a-t-il déjà mis une solution en place?`;
+        document.getElementById('step-indicator').innerText = `Besoin ${currentNeedIndex + 1} sur ${needs.length}`;
+
+        const saved = auditData.precisions[need] || { hasSolution: "", p: "", e: "", n: "" };
+        document.getElementById('current-prod').value = saved.p || "";
+        document.getElementById('current-etab').value = saved.e || "";
+        document.getElementById('current-note').value = saved.n || "";
+
+        const btnOui = document.getElementById('btn-has-sol-oui');
+        const btnNon = document.getElementById('btn-has-sol-non');
+        btnOui.classList.remove('selected'); btnNon.classList.remove('selected');
+
+        if (saved.hasSolution === 'Oui') {
+            btnOui.classList.add('selected');
+            document.getElementById('need-details-area').style.display = "block";
+        } else if (saved.hasSolution === 'Non') {
+            btnNon.classList.add('selected');
+            document.getElementById('need-details-area').style.display = "none";
+        } else {
+            document.getElementById('need-details-area').style.display = "none";
+        }
+
+        showPage('page10');
     }
 
     function setNeedSolution(val, el) {
         const needs = currentType === "dir" ? auditData.besoinsDir : auditData.besoinsSoc;
         const need = needs[currentNeedIndex];
-        auditData.precisions[need] = { hasSolution: val };
-        el.parentElement.querySelectorAll('.option-card').forEach(s => s.classList.remove('selected'));
+
+        if (!auditData.precisions[need]) auditData.precisions[need] = {};
+        auditData.precisions[need].hasSolution = val;
+
+        const siblings = el.parentElement.querySelectorAll('.option-card');
+        siblings.forEach(s => s.classList.remove('selected'));
         el.classList.add('selected');
-        document.getElementById('need-details-area').style.display = (val === 'Oui') ? 'block' : 'none';
+
+        document.getElementById('need-details-area').style.display = (val === 'Oui') ? "block" : "none";
     }
 
     function navPrecisionNext() {
         const needs = currentType === "dir" ? auditData.besoinsDir : auditData.besoinsSoc;
         const need = needs[currentNeedIndex];
-        if (auditData.precisions[need]?.hasSolution === 'Oui') {
-            auditData.precisions[need].p = document.getElementById('current-prod').value;
-            auditData.precisions[need].n = document.getElementById('current-note').value;
+
+        if (!auditData.precisions[need] || !auditData.precisions[need].hasSolution) {
+            showMessage("Indiquez si une solution existe.");
+            return;
         }
-        if (currentNeedIndex < needs.length - 1) { currentNeedIndex++; initPrecisionPage(); }
-        else {
+
+        if (auditData.precisions[need].hasSolution === 'Oui') {
+            auditData.precisions[need].p = document.getElementById('current-prod').value;
+            auditData.precisions[need].e = document.getElementById('current-etab').value;
+            auditData.precisions[need].n = document.getElementById('current-note').value;
+        } else {
+            auditData.precisions[need].p = "";
+            auditData.precisions[need].e = "";
+            auditData.precisions[need].n = "";
+        }
+
+        if (currentNeedIndex < needs.length - 1) {
+            currentNeedIndex++;
+            initPrecisionPage();
+        } else {
             if (currentType === "dir" && auditData.typesBesoins.includes('Société')) showPage(11);
-            else showPage('page-contact');
+            else goToPostAudit();
         }
     }
 
-    function navPrecisionBack() { if (currentNeedIndex > 0) { currentNeedIndex--; initPrecisionPage(); } else showPage(7); }
-    function savePage14() { auditData.impotNature = document.getElementById('select-impot-nature').value; showPage('page-contact'); }
-    function saveContact() { 
-        auditData.clientMail = document.getElementById('in_client_mail').value; 
-        auditData.clientTel = document.getElementById('in_client_tel').value; 
-        showPage(15); 
+    function navPrecisionBack() {
+        if (currentNeedIndex > 0) { currentNeedIndex--; initPrecisionPage(); }
+        else { if (currentType === "dir") showPage(8); else showPage(11); }
+    }
+
+    function savePage14() {
+        auditData.impotNature = document.getElementById('select-impot-nature').value || "";
+        auditData.impotMontant = document.getElementById('select-impot-montant').value || "";
+        auditData.impotLevier = document.getElementById('select-impot-levier').value || "";
+        showPage('page-contact');
+    }
+
+    function saveContact() {
+        auditData.clientMail = document.getElementById('in_client_mail').value.trim();
+        auditData.clientTel = document.getElementById('in_client_tel').value.trim();
+        showPage(15);
+    }
+
+    function prevFromContact() {
+        if (auditData.besoinsDir.includes("Réduire son imposition")) showPage(14);
+        else if (auditData.typesBesoins.includes('Société')) {
+            currentType = "soc"; currentNeedIndex = auditData.besoinsSoc.length - 1; initPrecisionPage();
+        } else {
+            currentType = "dir"; currentNeedIndex = auditData.besoinsDir.length - 1; initPrecisionPage();
+        }
+    }
+
+    function goToPostAudit() {
+        if (auditData.besoinsDir.includes("Réduire son imposition")) showPage(14);
+        else showPage('page-contact');
+    }
+
+    function prevFromPage11() {
+        if (auditData.typesBesoins.includes('Dirigeant')) {
+            currentType = "dir"; currentNeedIndex = auditData.besoinsDir.length - 1; initPrecisionPage();
+        } else prevFromPage7();
+    }
+
+    function prevFromPage14() {
+        if (auditData.typesBesoins.includes('Société')) {
+            currentType = "soc"; currentNeedIndex = auditData.besoinsSoc.length - 1; initPrecisionPage();
+        } else if (auditData.typesBesoins.includes('Dirigeant')) {
+            currentType = "dir"; currentNeedIndex = auditData.besoinsDir.length - 1; initPrecisionPage();
+        } else showPage(7);
     }
 
     function compileSummary() {
-        auditData.commentaire = document.getElementById('in_commentaire').value;
-        let html = `<div class="summary-section"><span class="section-title">Synthèse</span>`;
-        html += `Client: <b>${auditData.client}</b><br>Société: <b>${auditData.forme}</b></div>`;
+        auditData.commentaire = document.getElementById('in_commentaire').value || "";
+
+        let html = `
+            <div class="summary-section">
+                <span class="section-title">INFORMATIONS</span>
+                <div class="summary-item">Cabinet : <b>${auditData.cabinet}</b></div>
+                <div class="summary-item">Collaborateur : <b>${auditData.collab}</b></div>
+                <div class="summary-item">Client : <b>${auditData.client}</b></div>
+                <div class="summary-item">Structure : <b>${auditData.forme}</b></div>
+                <div class="summary-item">Effectif : <b>${auditData.effectif}</b></div>
+                <div class="summary-item">Statut du dirigeant : <b>${auditData.statut}</b></div>
+                <div class="summary-item">E-mail : <b>${auditData.clientMail || 'N/A'}</b></div>
+                <div class="summary-item">Téléphone direct : <b>${auditData.clientTel || 'N/A'}</b></div>
+            </div>
+        `;
+
+        if (auditData.treso === 'Oui') {
+            html += `
+            <div class="summary-section">
+                <span class="section-title">ANALYSE DE LA TRÉSORERIE</span>
+                <div class="summary-item">Montant de la trésorerie : <b>${auditData.treso_montant || 'N/A'}</b></div>
+                <div class="summary-item">BFR : <b>${auditData.treso_bfr || 'N/A'}</b></div>
+                <div class="summary-item">Excédent optimisable : <b>${auditData.treso_excedent || 'N/A'}</b></div>
+                <div class="summary-item">Historique placements : <b>${auditData.dejaPlacementTreso}</b></div>
+            </div>`;
+        }
+
+        const groups = [
+            { key: 'besoinsDir', label: 'ANALYSE DIRIGEANT' },
+            { key: 'besoinsSoc', label: 'ANALYSE ENTREPRISE' }
+        ];
+
+        groups.forEach(g => {
+            if (auditData[g.key].length > 0) {
+                html += `<div class="summary-section"><span class="section-title">${g.label}</span>`;
+                auditData[g.key].forEach(need => {
+                    const p = auditData.precisions[need] || { hasSolution: 'Non' };
+                    html += `<div class="objective-detail-block">
+                        <div class="summary-item">${need} : <b>${p.hasSolution}</b></div>`;
+                    if (p.hasSolution === "Oui") {
+                        html += `<div style="font-size:0.85rem; opacity:0.8; margin-top:5px;">
+                            Produit : <b>${p.p || 'N/A'}</b> / Organisme : <b>${p.e || 'N/A'}</b><br>
+                            <i>"${p.n || 'N/A'}"</i>
+                        </div>`;
+                    }
+                    html += `</div>`;
+                });
+                html += `</div>`;
+            }
+        });
+
+        if (auditData.impotNature) {
+            html += `
+            <div class="summary-section">
+                <span class="section-title">ANALYSE FISCALE</span>
+                <div class="summary-item">Nature de l'impôt : <b>${auditData.impotNature}</b></div>
+                <div class="summary-item">Montant cible : <b>${auditData.impotMontant}</b></div>
+                <div class="summary-item">Levier préféré : <b>${auditData.impotLevier}</b></div>
+            </div>`;
+        }
+
+        if (auditData.commentaire && auditData.commentaire.trim() !== "") {
+            html += `
+            <div class="summary-section">
+                <span class="section-title">NOTE DU COLLABORATEUR</span>
+                <p style="font-family: 'Futura', sans-serif; padding:15px; background:#F8EFEA; border-radius:8px;">
+                    ${auditData.commentaire.replace(/\n/g, '<br>')}
+                </p>
+            </div>`;
+        }
+
         document.getElementById('final-summary-full').innerHTML = html;
+
+        // On arrive sur page 16, le champ email collab est vide par défaut à chaque audit
+        const collabMailField = document.getElementById('in_collab_mail');
+        if (collabMailField) collabMailField.value = auditData.collabMail || "";
+
         showPage(16);
     }
 
     async function sendAuditToMake() {
-        auditData.collabMail = document.getElementById('in_collab_mail').value.trim();
-        if (!auditData.collabMail) { alert("Email requis."); return; }
+        // ✅ Email collab obligatoire avant envoi
+        const cm = (document.getElementById('in_collab_mail')?.value || "").trim();
+        if (!cm) {
+            showMessage("Veuillez renseigner votre adresse e-mail avant l'envoi.");
+            return;
+        }
+        auditData.collabMail = cm;
+
+        // éviter double-clic
+        const btns = document.querySelectorAll('#final-actions button');
+        btns.forEach(b => b.disabled = true);
+
         try {
+            const payload = { auditData };
+
             const res = await fetch(MAKE_WEBHOOK_URL, {
-                method: "POST", headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({ auditData })
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
             });
-            if (res.ok) showPage(17); else alert("Erreur d'envoi.");
-        } catch(e) { alert("Erreur réseau."); }
+
+            if (!res.ok) {
+                btns.forEach(b => b.disabled = false);
+                showMessage("Erreur lors de l'envoi. Réessayez.");
+                return;
+            }
+
+            showPage(17);
+        } catch (e) {
+            btns.forEach(b => b.disabled = false);
+            showMessage("Erreur réseau. Vérifiez votre connexion et réessayez.");
+        }
+    }
+
+    function resetApp() {
+        auditData = {
+            cabinet: "", collab: "", collabMail: "", client: "", forme: "", effectif: "", statut: "", treso: "",
+            treso_montant: "", treso_bfr: "", treso_excedent: "", dejaPlacementTreso: "",
+            clientMail: "", clientTel: "",
+            typesBesoins: [], besoinsDir: [], besoinsSoc: [],
+            precisions: {},
+            impotNature: "", impotMontant: "", impotLevier: "",
+            commentaire: ""
+        };
+        currentType = "";
+        currentNeedIndex = 0;
+
+        // Reset champs page 1
+        document.getElementById('input-cabinet').value = "";
+        document.getElementById('input-collab').value = "";
+        document.getElementById('input-client').value = "";
+
+        // Reset champ mail collab
+        const collabMailField = document.getElementById('in_collab_mail');
+        if (collabMailField) collabMailField.value = "";
+
+        // Reset selections visuelles
+        document.querySelectorAll('.option-card.selected').forEach(el => el.classList.remove('selected'));
+
+        // Reset synthèse
+        document.getElementById('final-summary-full').innerHTML = "";
+
+        showPage(1);
     }
 </script>
 
