@@ -36,7 +36,7 @@
 
         body { display: flex; flex-direction: column; }
 
-        /* HEADER FIXE AVEC LOGOS */
+        /* HEADER FIXE AVEC LOGOS (sticky) */
         .top-header {
             width: 100%;
             padding: 15px 40px;
@@ -48,6 +48,10 @@
             gap: 20px;
             visibility: hidden;
             z-index: 10;
+
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
         }
 
         .header-logo { height: 40px; width: auto; object-fit: contain; }
@@ -288,7 +292,7 @@
             font-size: 0.8rem;
         }
 
-        /* PAGE 16 : RESPONSIVE (plus de verrou plein écran) */
+        /* PAGE 16 */
         .final-title { margin-bottom: 12px; }
         .audit-accent-50 { color: var(--accent-gold-50); }
 
@@ -311,7 +315,6 @@
             padding-top: 10px;
         }
 
-        /* Zone scrollable unique sur page 16 (desktop ok) */
         #page16 #final-summary-full.summary-box{
             flex: 1 1 auto;
             width: 100%;
@@ -328,7 +331,6 @@
             flex-shrink: 0;
         }
 
-        /* Champ email collab sur page 16 */
         .collab-mail-wrap{
             width: 100%;
             max-width: 650px;
@@ -340,7 +342,7 @@
             letter-spacing: 0.2px;
         }
 
-        /* PAGE 17 : LOGO + TEXTE SECONDaire */
+        /* PAGE 17 */
         .thanks-logo{
             height: 70px;
             width: auto;
@@ -351,6 +353,9 @@
 
         /* =========================
            RESPONSIVE (mobile/tablette)
+           1) Tablette = 2 colonnes
+           2) Mobile = 1 colonne
+           3) Nav sticky en bas sur mobile
            ========================= */
 
         @media (max-width: 1024px) {
@@ -367,28 +372,39 @@
             }
         }
 
-        @media (max-width: 768px) {
+        /* Tablette : besoins en 2 colonnes (au lieu de 3) */
+        @media (max-width: 900px) {
+            .grid-needs { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Mobile : tout en 1 colonne + navigation sticky bas */
+        @media (max-width: 600px) {
             :root { --title-size: 1.35rem; }
 
             .subtitle { font-size: 1rem; }
 
-            /* Grilles -> 1 colonne */
             .option-grid { grid-template-columns: 1fr; }
             .grid-needs { grid-template-columns: 1fr; }
 
             .option-card { min-height: 70px; font-size: 0.9rem; }
 
-            /* Champs */
             input, select, textarea { padding: 13px 14px; font-size: 1rem; }
             textarea { height: 110px; }
 
-            /* Boutons */
+            /* Espace bas pour éviter que le contenu passe sous la nav sticky */
+            .page { padding-bottom: 110px; }
+
             .nav-actions {
                 flex-direction: column;
                 gap: 12px;
-                margin-top: 22px;
-                padding-bottom: 10px;
+                margin-top: 18px;
+                padding: 12px 0 12px 0;
                 width: 100%;
+
+                position: sticky;
+                bottom: 0;
+                z-index: 30;
+                background: var(--bg-color);
             }
 
             .btn-jad, .btn-prev {
@@ -399,16 +415,15 @@
                 text-align: center;
             }
 
-            /* Logos */
             .logos-center { gap: 18px; margin-bottom: 24px; }
             .logo-center-img { height: 60px; }
 
-            /* Page 10 (précisions) : la grille 2 colonnes passe en 1 */
+            /* Page 10 : la grille inline 2 colonnes passe en 1 */
             #page10 #need-details-area > div[style*="grid-template-columns"]{
                 grid-template-columns: 1fr !important;
             }
 
-            /* Page 16 : éviter une “double scroll” pénible sur mobile */
+            /* Page 16 : éviter une double-scroll sur mobile */
             #page16 #final-summary-full.summary-box{
                 max-height: none;
                 overflow-y: visible;
@@ -882,8 +897,13 @@
         const typeLabel = currentType === "dir" ? "Dirigeant" : "Entreprise";
 
         document.getElementById('precision-title').innerText = `Existence de solutions (${typeLabel})`;
+
+        /* ✅ Mise en page sur 3 lignes demandée */
         document.getElementById('precision-subtitle').innerHTML =
-            `Pour l'objectif "<span style="color:#FFBD59; font-weight:700;">${need}</span>", votre client a-t-il déjà mis une solution en place?`;
+            `Pour l'objectif<br>
+             <span style="color:#FFBD59; font-weight:700;">${need}</span><br>
+             Votre client a-t-il déjà mis une solution en place ?`;
+
         document.getElementById('step-indicator').innerText = `Besoin ${currentNeedIndex + 1} sur ${needs.length}`;
 
         const saved = auditData.precisions[need] || { hasSolution: "", p: "", e: "", n: "" };
@@ -1070,7 +1090,6 @@
 
         document.getElementById('final-summary-full').innerHTML = html;
 
-        // On arrive sur page 16, le champ email collab est vide par défaut à chaque audit
         const collabMailField = document.getElementById('in_collab_mail');
         if (collabMailField) collabMailField.value = auditData.collabMail || "";
 
@@ -1078,7 +1097,6 @@
     }
 
     async function sendAuditToMake() {
-        // ✅ Email collab obligatoire avant envoi
         const cm = (document.getElementById('in_collab_mail')?.value || "").trim();
         if (!cm) {
             showMessage("Veuillez renseigner votre adresse e-mail avant l'envoi.");
@@ -1086,7 +1104,6 @@
         }
         auditData.collabMail = cm;
 
-        // éviter double-clic
         const btns = document.querySelectorAll('#final-actions button');
         btns.forEach(b => b.disabled = true);
 
@@ -1125,19 +1142,15 @@
         currentType = "";
         currentNeedIndex = 0;
 
-        // Reset champs page 1
         document.getElementById('input-cabinet').value = "";
         document.getElementById('input-collab').value = "";
         document.getElementById('input-client').value = "";
 
-        // Reset champ mail collab
         const collabMailField = document.getElementById('in_collab_mail');
         if (collabMailField) collabMailField.value = "";
 
-        // Reset selections visuelles
         document.querySelectorAll('.option-card.selected').forEach(el => el.classList.remove('selected'));
 
-        // Reset synthèse
         document.getElementById('final-summary-full').innerHTML = "";
 
         showPage(1);
