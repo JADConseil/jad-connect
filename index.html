@@ -140,6 +140,12 @@
             text-transform: uppercase;
         }
 
+	label-lower-case {
+	    font-weight: 0;
+	    text-transform: none;
+
+	}
+
         input, select, textarea {
             width: 100%;
             padding: 14px 18px;
@@ -702,7 +708,7 @@
     <div id="page15" class="page">
         <h1 class="big-title">Observations <span style="color: var(--accent-gold);">complémentaires</span></h1>
         <div class="form-container" style="max-width: 650px;">
-            <div class="field"><label>Transmettez nous toutes les informations qui vous sembleraient utiles pour la bonne analyse de votre audit</label><textarea id="in_commentaire" style="height:150px;"></textarea></div>
+            <div class="field"><label class="label-lower-case">Transmettez nous toutes les informations qui vous sembleraient utiles pour la bonne analyse de votre audit</label><textarea id="in_commentaire" style="height:150px;"></textarea></div>
         </div>
         <div class="nav-actions">
             <button class="btn-prev" onclick="showPage('page-contact')">Précédent</button>
