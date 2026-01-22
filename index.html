@@ -85,10 +85,10 @@
             margin: auto;
 
             /* ✅ Responsive : la page peut grandir et scroller */
-            min-height: calc(100vh - 80px);
+            /*min-height: calc(100vh - 80px);
             height: auto;
             overflow: visible;
-            padding: 10px 0;
+            padding: 10px 0;*/
         }
 
         .page.active { display: flex; }
@@ -104,9 +104,13 @@
             font-size: var(--title-size);
             font-weight: 700;
             color: var(--primary-vin);
-            margin-bottom: 2.5vh;
+            margin-bottom: 4.5vh;
             line-height: 1.2;
         }
+
+	.page-title {
+	    
+	}
 
         .subtitle {
             font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
@@ -547,9 +551,10 @@
 
     <div id="page6b" class="page">
         <h1 class="page-title">Précisions Financières</h1>
+	<div style="margin:15px 0 15px 0">Renseignez ce que vous avez, vous pourrez poursuivre même si tout n’est pas complété</div>
         <div class="form-container">
             <div class="field"><label>Montant actuel de la trésorerie</label><input type="text" id="in_treso_montant" onblur="handleCurrencyFormat(this)" oninput="cleanNonNumeric(this)"></div>
-            <div class="field"><label>BFR (Besoin en Fonds de Roulement)</label><input type="text" id="in_treso_bfr" onblur="handleCurrencyFormat(this)" oninput="cleanNonNumeric(this)"></div>
+            <div class="field"><label>Budget nécessaire à l'entreprise pour tenir 2 mois sans encaissement</label><input type="text" id="in_treso_bfr" onblur="handleCurrencyFormat(this)" oninput="cleanNonNumeric(this)"></div>
             <div class="field"><label>Votre estimation de l'excédent optimisable</label><input type="text" id="in_treso_excedent" onblur="handleCurrencyFormat(this)" oninput="cleanNonNumeric(this)"></div>
 
             <div style="margin-top: 15px;">
@@ -568,6 +573,7 @@
 
     <div id="page7" class="page">
         <h1 class="page-title">Identifions le périmètre de l'audit</h1>
+	<div style="margin: 15px 0 15px 0">Plusieurs choix possibles</div>
         <div class="option-grid">
             <div class="option-card" id="type-dirigeant" onclick="toggleOption('typesBesoins', 'Dirigeant', this)">Pour lui en tant que dirigeant</div>
             <div class="option-card" id="type-societe" onclick="toggleOption('typesBesoins', 'Société', this)">Pour sa société / ses salariés</div>
@@ -580,6 +586,8 @@
 
     <div id="page8" class="page">
         <h1 class="big-title">Besoins personnels du <span style="color: var(--accent-gold);">dirigeant</span></h1>
+	<div style="margin: 15px 0 15px 0">Plusieurs choix possibles</div>
+
         <div class="option-grid grid-needs">
             <div class="option-card" onclick="toggleOption('besoinsDir', 'Se protéger en cas d’arrêt de travail', this)">Se protéger en cas d’arrêt de travail</div>
             <div class="option-card" onclick="toggleOption('besoinsDir', 'Anticiper sa retraite', this)">Anticiper sa retraite</div>
@@ -623,6 +631,8 @@
 
     <div id="page11" class="page">
         <h1 class="big-title">Besoins pour <span style="color: var(--accent-gold);">sa société / ses salariés</span></h1>
+	<div style="margin: 15px 0 15px 0">Plusieurs choix possibles</div>
+
         <div class="option-grid grid-needs">
             <div class="option-card" onclick="toggleOption('besoinsSoc', 'Protéger l’entreprise en cas de problème touchant le dirigeant', this)">Protéger l’entreprise en cas de problème touchant le dirigeant</div>
             <div class="option-card" onclick="toggleOption('besoinsSoc', 'Sécuriser l’entreprise face aux imprévus humains ou financiers', this)">Sécuriser l’entreprise face aux imprévus humains ou financiers</div>
@@ -692,7 +702,7 @@
     <div id="page15" class="page">
         <h1 class="big-title">Observations <span style="color: var(--accent-gold);">complémentaires</span></h1>
         <div class="form-container" style="max-width: 650px;">
-            <div class="field"><label>Note du collaborateur</label><textarea id="in_commentaire" style="height:150px;"></textarea></div>
+            <div class="field"><label>Transmettez nous toutes les informations qui vous sembleraient utiles pour la bonne analyse de votre audit</label><textarea id="in_commentaire" style="height:150px;"></textarea></div>
         </div>
         <div class="nav-actions">
             <button class="btn-prev" onclick="showPage('page-contact')">Précédent</button>
